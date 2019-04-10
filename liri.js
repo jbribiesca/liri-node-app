@@ -11,13 +11,12 @@ var searchQ = process.argv.slice(3).join(" ");
 
 function log(message) {
     console.log(message);
-    fs.appendFile("logging.txt", message + "\n", function(err){
+    fs.appendFile("logging.txt", "\n" + message + "\n", function (err) {
         if (err) {
             console.log(err)
         }
     })
 }
-
 liriBot(nodeText, searchQ);
 function liriBot(nodeArgs, searchQuery) {
     if (nodeArgs == "concert-this") {
@@ -51,7 +50,7 @@ function liriBot(nodeArgs, searchQuery) {
 }
 function spotifyThisSong(tmp) {
     spotify.search({ type: 'track', query: tmp, limit: 1 }, function (err, data) {
-        log("Song for " + tmp)
+        log("Search results for " + tmp)
         log("Artist Name: " + data.tracks.items[0].album.artists[0].name);
         log("Song Name: " + data.tracks.items[0].name);
         log("Song Link: " + data.tracks.items[0].external_urls.spotify)
@@ -62,7 +61,7 @@ function spotifyThisSong(tmp) {
 function concertThis(tmp) {
     axios.get("https://rest.bandsintown.com/artists/" + tmp + "/events?app_id=" + keys.bands).then(
         function (response) {
-            log("Shows for: " + tmp);
+            log("Search results for " + tmp);
             response.data.forEach(function (element) {
                 log("Venue: " + element.venue.name);
                 log("Venue Location: " + element.venue.city + ", " + element.venue.region + " " + element.venue.country);
@@ -76,6 +75,7 @@ function concertThis(tmp) {
 function movieThis(tmp) {
     axios.get("http://www.omdbapi.com/?t=" + tmp + "&y=&plot=short&apikey=" + keys.movies.key).then(
         function (response) {
+            log("Search results for " + tmp)
             log("Movie Title: " + response.data.Title);
             log("Year: " + response.data.Year);
             log("IMBD Rating: " + response.data.imdbRating);
