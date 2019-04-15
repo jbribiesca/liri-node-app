@@ -6,6 +6,14 @@ Have you ever wanted to search for a song, movie, or concert but have to go to a
 Welcome the LIRI app, it will let you use predefined search terms to find exactly what you are looking for in an all in one solution.
 
 # How to begin
+
+You will need to create your own .env with your own API keys formatted this way:
+
+SPOTIFY_ID=key
+SPOTIFY_SECRET=key
+BANDSAPIKEY=key
+OMDBAPIKEY=key
+
 All you have to do is call:
 node liri.js
 
